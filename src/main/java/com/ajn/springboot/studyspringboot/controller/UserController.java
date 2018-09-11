@@ -50,7 +50,7 @@ public class UserController {
     @GetMapping
     public RestResponse<User> getUser(@NotBlank(message = "登录名不能为空") String word) {
         logger.debug(word);
-        return RestResponse.ok(adminService.select(word));
+        return RestResponse.ok(adminService.selectUser(1));
     }
 
     @ApiOperation("分页查询用户")
