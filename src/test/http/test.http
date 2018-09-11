@@ -1,0 +1,10 @@
+###
+GET http://localhost:8080/hello
+
+###
+GET http://localhost:8080/v2/api-docs
+Accept: application/json
+
+###
+
+###
