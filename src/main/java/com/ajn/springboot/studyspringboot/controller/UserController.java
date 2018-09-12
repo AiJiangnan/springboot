@@ -18,6 +18,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.io.File;
@@ -48,15 +49,17 @@ public class UserController {
             @ApiImplicitParam(name = "password", value = "密码", paramType = "query")
     })
     @GetMapping
-    public RestResponse<User> getUser(@NotBlank(message = "登录名不能为空") String word) {
+    public RestResponse<User> getUser(@NotBlank(message = "登录名不能为空") String word, HttpSession session) {
         logger.debug(word);
+        session.setAttribute("abc", "123");
         return RestResponse.ok(adminService.selectUser(1));
     }
 
     @ApiOperation("分页查询用户")
     @GetMapping("{pageNum}/{pageSize}")
-    public RestResponse<Page<User>> getUserPage(@PathVariable int pageNum, @PathVariable int pageSize) {
+    public RestResponse<Page<User>> getUserPage(@PathVariable int pageNum, @PathVariable int pageSize, HttpSession session) {
         logger.debug("pageNum:{},pageSize:{}", pageNum, pageSize);
+        logger.debug("session:{}", session.getAttribute("abc"));
         return RestResponse.ok(adminService.selectPage(pageNum, pageSize));
     }
 

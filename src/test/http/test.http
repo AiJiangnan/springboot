@@ -1,5 +1,5 @@
 ###
-GET http://localhost:8080/hello
+GET http://localhost:8080/user?word=123
 
 ###
 GET http://localhost:8080/v2/api-docs
