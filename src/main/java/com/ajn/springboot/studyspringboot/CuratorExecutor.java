@@ -40,16 +40,17 @@ public class CuratorExecutor {
 
     @PreDestroy
     public void destroy() {
-        if (client != null) {
-            logger.debug("Close zookeeper successful");
-            client.close();
-        }
         if (cache != null) {
             try {
+                logger.debug("Close zookeeper cache successful");
                 cache.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        if (client != null) {
+            logger.debug("Close zookeeper successful");
+            client.close();
         }
     }
 
