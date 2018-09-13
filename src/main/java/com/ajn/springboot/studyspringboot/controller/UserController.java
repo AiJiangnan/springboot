@@ -51,7 +51,7 @@ public class UserController {
     @GetMapping
     public RestResponse<User> getUser(@NotBlank(message = "登录名不能为空") String word, HttpSession session) {
         logger.debug(word);
-        session.setAttribute("abc", "123");
+        session.setAttribute("abc", "1234");
         return RestResponse.ok(adminService.selectUser(1));
     }
 
