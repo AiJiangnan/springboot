@@ -1,0 +1,11 @@
+{
+  "properties": [
+    {
+      "name": "spring.zookeeper.host",
+      "type": "java.lang.String",
+      "sourceType": "com.ajn.springboot.studyspringboot.config.ZookeeperConfig",
+      "defaultValue": "127.0.0.1:2181",
+      "description": "Zookeeper server and port"
+    }
+  ]
+}
