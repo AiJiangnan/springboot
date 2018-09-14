@@ -9,17 +9,20 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author 艾江南
  * @date 2018/9/13
  */
 @Component
+@Profile("prod")
 public class CuratorExecutor {
 
     final private static Logger logger = LoggerFactory.getLogger(CuratorExecutor.class);
@@ -56,7 +59,7 @@ public class CuratorExecutor {
 
     public void create(String path, String data) {
         try {
-            client.create().forPath(path, data.getBytes());
+            client.create().forPath(path, data.getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,7 +67,7 @@ public class CuratorExecutor {
 
     public String get(String path) {
         try {
-            return new String(client.getData().forPath(path));
+            return new String(client.getData().forPath(path), StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,7 +76,7 @@ public class CuratorExecutor {
 
     public void set(String path, String data) {
         try {
-            client.setData().forPath(path, data.getBytes());
+            client.setData().forPath(path, data.getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             e.printStackTrace();
         }
