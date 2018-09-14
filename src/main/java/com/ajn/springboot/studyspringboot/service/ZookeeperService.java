@@ -1,6 +1,6 @@
 package com.ajn.springboot.studyspringboot.service;
 
-import com.ajn.springboot.studyspringboot.CuratorExecutor;
+import com.ajn.springboot.studyspringboot.executor.CuratorExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.ajn.springboot.studyspringboot;
+package com.ajn.springboot.studyspringboot.executor;
 
 import com.ajn.springboot.studyspringboot.config.ZookeeperConfig;
 import org.apache.curator.framework.CuratorFramework;
