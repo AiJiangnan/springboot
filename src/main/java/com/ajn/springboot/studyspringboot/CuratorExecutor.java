@@ -54,27 +54,48 @@ public class CuratorExecutor {
         }
     }
 
-    public void create(String path, String data) throws Exception {
-        client.create().forPath(path, data.getBytes());
+    public void create(String path, String data) {
+        try {
+            client.create().forPath(path, data.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public String get(String path) throws Exception {
-        return new String(client.getData().forPath(path));
+    public String get(String path) {
+        try {
+            return new String(client.getData().forPath(path));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public void set(String path, String data) throws Exception {
-        client.setData().forPath(path, data.getBytes());
+    public void set(String path, String data) {
+        try {
+            client.setData().forPath(path, data.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void delete(String path) throws Exception {
-        client.delete().forPath(path);
+    public void delete(String path) {
+        try {
+            client.delete().forPath(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void watch(String path, PathChildrenCacheListener listener) throws Exception {
+    public void watch(String path, PathChildrenCacheListener listener) {
         // new TreeCache()
         // new NodeCache()
-        cache = new PathChildrenCache(client, path, true);
-        cache.start();
-        cache.getListenable().addListener(listener);
+        try {
+            cache = new PathChildrenCache(client, path, true);
+            cache.start();
+            cache.getListenable().addListener(listener);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

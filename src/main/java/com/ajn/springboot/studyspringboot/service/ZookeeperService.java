@@ -19,27 +19,18 @@ public class ZookeeperService {
     private CuratorExecutor curatorExecutor;
 
     public String get() {
-        String s = null;
-        try {
-            s = curatorExecutor.get("/abc");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String s = curatorExecutor.get("/abc");
         logger.debug("get: {}", s);
         return s;
     }
 
     public void watch() {
-        try {
-            curatorExecutor.watch("/abc", (client, event) -> {
-                logger.debug("事件类型: {}", event.getType());
-                if (event.getData() != null) {
-                    logger.debug("节点数据: {} = {}", event.getData().getPath(), new String(event.getData().getData()));
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        curatorExecutor.watch("/abc", (client, event) -> {
+            logger.debug("事件类型: {}", event.getType());
+            if (event.getData() != null) {
+                logger.debug("节点数据: {} = {}", event.getData().getPath(), new String(event.getData().getData()));
+            }
+        });
     }
 
 }
