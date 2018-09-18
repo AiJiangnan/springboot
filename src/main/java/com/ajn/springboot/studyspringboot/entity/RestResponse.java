@@ -1,6 +1,5 @@
 package com.ajn.springboot.studyspringboot.entity;
 
-import io.swagger.annotations.ApiModelProperty;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -9,11 +8,8 @@ import org.springframework.http.HttpStatus;
  */
 public class RestResponse<T> {
 
-    @ApiModelProperty(value = "返回编码（与HTTP状态码一致）", example = "200")
     private int code;
-    @ApiModelProperty(value = "返回消息", example = "OK")
     private String msg;
-    @ApiModelProperty("返回数据")
     private T data;
 
     public RestResponse(HttpStatus status) {

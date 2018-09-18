@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
  * @date 2018/9/13
  */
 @Configuration
-@ConfigurationProperties(prefix = "spring.zookeeper")
-public class ZookeeperConfig {
+@ConfigurationProperties("spring.zookeeper")
+public class ZookeeperProperties {
 
     private String host = "127.0.0.1:2181";
 

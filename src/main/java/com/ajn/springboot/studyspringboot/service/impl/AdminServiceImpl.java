@@ -14,7 +14,8 @@ import org.springframework.stereotype.Service;
  * @author 艾江南
  */
 @Service
-public class AdminServieImpl implements AdminService {
+@com.alibaba.dubbo.config.annotation.Service
+public class AdminServiceImpl implements AdminService {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 

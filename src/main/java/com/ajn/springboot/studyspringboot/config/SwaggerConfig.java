@@ -1,3 +1,4 @@
+/*
 package com.ajn.springboot.studyspringboot.config;
 
 import org.springframework.context.annotation.Bean;
@@ -17,10 +18,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * @author 艾江南
  * @date 2018/9/5
- */
+ *//*
+
 @Configuration
 @EnableSwagger2
 @Profile("test")
@@ -59,3 +62,4 @@ public class SwaggerConfig {
         return responseMessageList;
     }
 }
+*/

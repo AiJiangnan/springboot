@@ -1,6 +1,6 @@
 package com.ajn.springboot.studyspringboot.executor;
 
-import com.ajn.springboot.studyspringboot.config.ZookeeperConfig;
+import com.ajn.springboot.studyspringboot.config.ZookeeperProperties;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache;
@@ -28,15 +28,15 @@ public class CuratorExecutor {
     final private static Logger logger = LoggerFactory.getLogger(CuratorExecutor.class);
 
     @Autowired
-    private ZookeeperConfig zookeeperConfig;
+    private ZookeeperProperties zookeeperProperties;
 
     private CuratorFramework client;
     private PathChildrenCache cache;
 
     @PostConstruct
     private void init() {
-        logger.debug("Connect zookeeper: {}", zookeeperConfig.getHost());
-        client = CuratorFrameworkFactory.newClient(zookeeperConfig.getHost(),
+        logger.debug("Connect zookeeper: {}", zookeeperProperties.getHost());
+        client = CuratorFrameworkFactory.newClient(zookeeperProperties.getHost(),
                 new ExponentialBackoffRetry(1000, 3));
         client.start();
     }

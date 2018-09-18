@@ -4,10 +4,6 @@ import com.ajn.springboot.studyspringboot.entity.RestResponse;
 import com.ajn.springboot.studyspringboot.model.User;
 import com.ajn.springboot.studyspringboot.service.AdminService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -28,7 +24,6 @@ import java.math.BigDecimal;
 /**
  * @author 艾江南
  */
-@Api(tags = "用户相关")
 @Validated
 @RestController
 @RequestMapping("user")
@@ -43,11 +38,6 @@ public class UserController {
     @Autowired
     private Job importUserJob;
 
-    @ApiOperation("获取用户")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "word", value = "测试", paramType = "query"),
-            @ApiImplicitParam(name = "password", value = "密码", paramType = "query")
-    })
     @GetMapping
     public RestResponse<User> getUser(@NotBlank(message = "登录名不能为空") String word, HttpSession session) {
         logger.debug(word);
@@ -55,7 +45,6 @@ public class UserController {
         return RestResponse.ok(adminService.selectUser(1));
     }
 
-    @ApiOperation("分页查询用户")
     @GetMapping("{pageNum}/{pageSize}")
     public RestResponse<Page<User>> getUserPage(@PathVariable int pageNum, @PathVariable int pageSize, HttpSession session) {
         logger.debug("pageNum:{},pageSize:{}", pageNum, pageSize);
@@ -63,14 +52,12 @@ public class UserController {
         return RestResponse.ok(adminService.selectPage(pageNum, pageSize));
     }
 
-    @ApiOperation("新增用户")
     @PostMapping
     public RestResponse<Integer> addUser(@Valid User user) {
         logger.debug(user.toString());
         return RestResponse.ok(adminService.addUser(user));
     }
 
-    @ApiOperation("修改用户")
     @PostMapping("update")
     public RestResponse updateUser() {
         logger.debug("update user");
