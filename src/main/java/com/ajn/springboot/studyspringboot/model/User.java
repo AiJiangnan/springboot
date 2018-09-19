@@ -1,6 +1,7 @@
 package com.ajn.springboot.studyspringboot.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ public class User {
     private String id;
     private String username;
     private String password;
+    @DateTimeFormat(pattern = "yyyyMMdd HH:mm:ss")
     private Date createTime;
     private BigDecimal amount;
     private String total;

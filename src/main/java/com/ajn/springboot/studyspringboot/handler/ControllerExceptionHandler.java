@@ -23,6 +23,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler
     @ResponseBody
     public RestResponse validationExceptionHandler(Exception e) {
+        e.printStackTrace();
         if (e instanceof ConstraintViolationException) {
             ConstraintViolationException exception = (ConstraintViolationException) e;
             Set<ConstraintViolation<?>> violationSet = exception.getConstraintViolations();
@@ -39,7 +40,6 @@ public class ControllerExceptionHandler {
             List<ObjectError> errors = exception.getBindingResult().getAllErrors();
             return RestResponse.badRequest(errors.get(0).getDefaultMessage());
         }
-        e.printStackTrace();
         return RestResponse.serverError(e.getMessage());
     }
 

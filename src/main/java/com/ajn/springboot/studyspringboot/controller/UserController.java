@@ -67,6 +67,12 @@ public class UserController {
         return RestResponse.ok();
     }
 
+    @PostMapping("date")
+    public RestResponse date(User user) {
+        logger.debug("时间:{}", user);
+        return RestResponse.ok(user);
+    }
+
     @PostMapping("upload")
     public RestResponse upload(MultipartFile file) {
         logger.info("File name:{}", file.getOriginalFilename());
