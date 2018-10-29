@@ -3,6 +3,7 @@ package com.ajn.springboot.studyspringboot.controller;
 import com.ajn.springboot.studyspringboot.entity.RestResponse;
 import com.ajn.springboot.studyspringboot.model.User;
 import com.ajn.springboot.studyspringboot.service.AdminService;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -39,23 +39,24 @@ public class UserController {
     private Job importUserJob;
 
     @GetMapping
-    public RestResponse<User> getUser(@NotBlank(message = "登录名不能为空") String word, HttpSession session) {
-        logger.debug(word);
-        session.setAttribute("abc", "123");
-        return RestResponse.ok(adminService.selectUser(1));
+    public RestResponse<User> getUser() {
+        return RestResponse.ok(adminService.getOne(null));
     }
 
     @GetMapping("{pageNum}/{pageSize}")
     public RestResponse<Page<User>> getUserPage(@PathVariable int pageNum, @PathVariable int pageSize, HttpSession session) {
         logger.debug("pageNum:{},pageSize:{}", pageNum, pageSize);
         logger.debug("session:{}", session.getAttribute("abc"));
-        return RestResponse.ok(adminService.selectPage(pageNum, pageSize));
+        Page<User> page = new Page<>();
+        page.setCurrent(pageNum);
+        page.setSize(pageSize);
+        return RestResponse.ok((Page<User>) adminService.page(page, null));
     }
 
     @PostMapping
-    public RestResponse<Integer> addUser(@Valid User user) {
+    public RestResponse<Boolean> addUser(@Valid User user) {
         logger.debug(user.toString());
-        return RestResponse.ok(adminService.addUser(user));
+        return RestResponse.ok(adminService.save(user));
     }
 
     @PostMapping("update")
@@ -63,7 +64,9 @@ public class UserController {
         logger.debug("update user");
         User user = new User();
         user.setAmount(new BigDecimal(100));
-        adminService.updateUser(user);
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("id", 1);
+        adminService.update(user, updateWrapper);
         return RestResponse.ok();
     }
 

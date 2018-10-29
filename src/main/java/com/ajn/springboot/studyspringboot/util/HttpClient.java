@@ -2,7 +2,7 @@ package com.ajn.springboot.studyspringboot.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -21,12 +21,14 @@ public final class HttpClient {
     private final static RestTemplate REST_TEMPLATE;
 
     static {
-        REST_TEMPLATE = new RestTemplateBuilder()
-                .additionalMessageConverters(new StringHttpMessageConverter(StandardCharsets.UTF_8))
-                .uriTemplateHandler(new SimpleUriTemplateHandler())
-                .setReadTimeout(5000)
-                .setConnectTimeout(15000)
-                .build();
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setReadTimeout(5000);
+        factory.setConnectTimeout(15000);
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setRequestFactory(factory);
+        restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        restTemplate.setUriTemplateHandler(new SimpleUriTemplateHandler());
+        REST_TEMPLATE = restTemplate;
     }
 
     public static <T> T post(String url, Object request, Class<T> responseType) {

@@ -1,11 +1,15 @@
 package com.ajn.springboot.studyspringboot.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
 /**
  * @author 艾江南
  * @date 2018/9/5
  */
+@Getter
+@Setter
 public class RestResponse<T> {
 
     private int code;
@@ -52,29 +56,5 @@ public class RestResponse<T> {
 
     public static <T> RestResponse<T> ok(T data) {
         return new RestResponse<>(HttpStatus.OK, data);
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
     }
 }
