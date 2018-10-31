@@ -54,6 +54,10 @@
             <artifactId>spring-session-data-redis</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.0.5</version>
@@ -149,7 +153,10 @@
                 <filtering>true</filtering>
             </resource>
             <resource>
-                <directory>src/main/resources/${env}</directory>
+                <directory>src/main/profiles/${env}</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
             </resource>
         </resources>
         <plugins>
@@ -194,6 +201,10 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
@@ -203,6 +214,12 @@
             <properties>
                 <env>test</env>
             </properties>
+            <build>
+                <filters>
+                    <filter>src/main/profiles/test.properties</filter>
+                    <filter>src/main/profiles/test/test-dev.properties</filter>
+                </filters>
+            </build>
             <dependencies>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
@@ -221,6 +238,11 @@
             <properties>
                 <env>prod</env>
             </properties>
+            <build>
+                <filters>
+                    <filter>src/main/profiles/prod.properties</filter>
+                </filters>
+            </build>
         </profile>
     </profiles>
 
