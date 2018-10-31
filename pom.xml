@@ -28,6 +28,12 @@
         <start-class>com.ajn.springboot.studyspringboot.StudySpringbootApplication</start-class>
     </properties>
 
+    <scm>
+        <connection>scm:git:git@github.com:AiJiangnan/springboot.git</connection>
+        <url>https://github.com/AiJiangnan/springboot</url>
+        <developerConnection>scm:git:git@github.com:AiJiangnan/springboot.git</developerConnection>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
