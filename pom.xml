@@ -4,7 +4,7 @@
 
     <groupId>com.ajn.springboot</groupId>
     <artifactId>study-springboot</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>study-springboot</name>
@@ -31,7 +31,7 @@
         <connection>scm:git:git@github.com:AiJiangnan/springboot.git</connection>
         <url>https://github.com/AiJiangnan/springboot</url>
         <developerConnection>scm:git:git@github.com:AiJiangnan/springboot.git</developerConnection>
-      <tag>study-springboot-1.0.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <dependencies>
