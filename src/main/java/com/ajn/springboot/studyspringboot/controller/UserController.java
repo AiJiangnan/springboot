@@ -40,7 +40,7 @@ public class UserController {
 
     @GetMapping
     public RestResponse<User> getUser() {
-        return RestResponse.ok(adminService.getOne(null));
+        return RestResponse.ok(adminService.getAnnotation("world"));
     }
 
     @GetMapping("{pageNum}/{pageSize}")
