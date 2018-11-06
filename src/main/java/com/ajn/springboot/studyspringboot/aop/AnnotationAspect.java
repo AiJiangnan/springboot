@@ -41,9 +41,13 @@ public class AnnotationAspect {
             return JSON.parseObject(value, returnType);
         }
         Object proceed = joinPoint.proceed();
-        String jsonString = JSON.toJSONString(proceed);
-        redisUtils.setString(key, jsonString, timeout);
-        logger.debug("redis set key:{},value:{},timeout:{}", key, jsonString, timeout);
+        if (proceed != null) {
+            String jsonString = JSON.toJSONString(proceed);
+            redisUtils.setString(key, jsonString, timeout);
+            logger.debug("redis set key:{},value:{},timeout:{}", key, jsonString, timeout);
+        } else {
+            logger.debug("the value redis cached is null");
+        }
         return proceed;
     }
 
